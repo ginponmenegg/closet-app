@@ -42,7 +42,9 @@ small { color: var(--sub); font-weight: 400; }
 .wrap { flex-wrap: wrap; overflow: visible; }
 
 .row { display: flex; gap: 8px; }
-select, input[type=text], input[type=month], textarea {
+#tabs[hidden] { display: none; }
+.sync { margin-left: auto; color: var(--sub); font-size: 12px; }
+select, input[type=text], input[type=month], input[type=email], input[type=password], textarea {
   width: 100%; padding: 10px 12px; font: inherit; color: var(--fg);
   background: var(--card); border: 1px solid var(--line); border-radius: 10px;
 }
