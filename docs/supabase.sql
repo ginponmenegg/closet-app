@@ -18,6 +18,11 @@ create table if not exists public.clothes (
   updated_at    bigint not null
 );
 
+-- テーブルを使う権限。新しいプロジェクトでは自動では付かず、無いと
+-- 「permission denied for table」になる(2026-10-26 に実際に発生)。
+grant usage on schema public to authenticated;
+grant select, insert, update, delete on public.clothes to authenticated;
+
 alter table public.clothes enable row level security;
 
 drop policy if exists "clothes_select" on public.clothes;
