@@ -85,7 +85,16 @@ function viewLogin(msg = '') {
     e.preventDefault();
     $('#lerr').textContent = '確認中…';
     try { await sync.signIn($('#em').value.trim(), $('#pw').value); await boot(); }
-    catch (err) { $('#lerr').textContent = navigator.onLine ? 'ログインできませんでした。メールアドレスとパスワードを確認してください。' : 'オフラインです。電波のある所で試してください。'; console.warn(err); }
+    catch (err) {
+      console.warn(err);
+      const m = err?.message || String(err);
+      const why = !navigator.onLine ? 'オフラインです。電波のある所で試してください。'
+        : /Invalid login credentials/i.test(m) ? 'メールアドレスかパスワードが違うか、このアドレスのユーザーが作られていません。'
+        : /not confirmed/i.test(m) ? 'このユーザーは確認が済んでいません(作成時の「Auto Confirm User」のチェックが必要です)。'
+        : /rate limit|too many/i.test(m) ? '試行が多すぎます。少し待ってからもう一度どうぞ。'
+        : 'ログインできませんでした。';
+      $('#lerr').innerHTML = `${esc(why)}<br><small>詳細: ${esc(m)}</small>`;
+    }
   };
 }
 

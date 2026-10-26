@@ -1,5 +1,5 @@
 // 通信を優先し、取れなければ端末のキャッシュで開く(電波が弱い店内用)。
-const V = 'closet-v2';
+const V = 'closet-v3';
 const FILES = ['./', 'index.html', 'style.css', 'app.js', 'db.js', 'sync.js', 'config.js', 'categories.js', 'vendor/supabase.js',
   'manifest.webmanifest', 'icons/icon-180.png', 'icons/icon-192.png', 'icons/icon-512.png'];
 
